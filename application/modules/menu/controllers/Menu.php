@@ -6,20 +6,8 @@ class Menu extends MY_Controller
 
 	public function __construct()
 	{
-		if (!$this->session->userdata('role')) {
-			redirect('auth');
-		}
-		if ($this->session->userdata('role')) {
-			$this->db->select('*');
-			$this->db->from('user_access');
-			$this->db->join('user_submenu', 'user_access.id_menu=user_submenu.id_menu', 'inner');
-			$this->db->where('user_access.id_role', $this->session->userdata('role'));
-			$this->db->where('user_submenu.url', 'menu');
-			$access = $this->db->get()->result();
-			if (!$access) {
-				redirect('page');
-			}
-		}
+		$this->load->model('all_models', 'all');
+		$this->all->is_authenticated("menu");
 		parent::__construct();
 		$this->load->model('menu_model', 'model');
 	}
