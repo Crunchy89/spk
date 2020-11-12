@@ -143,7 +143,7 @@ class Hitung_model extends CI_Model
             'ci' => $ci,
             'ir' => $indexRasio,
             'cr' => $cr,
-            'konsistensi' => $cr < $indexRasio ? "Konsiten" : "Tidak Konsisten"
+            'konsistensi' => $cr <= 0.1 ? "Konsiten" : "Tidak Konsisten"
         ];
         return $data;
     }
